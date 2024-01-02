@@ -1,9 +1,9 @@
-const express = require('express')
+import  express from "express"
 
 const router = express.Router()
 
 router.post('/', (req, res) => {
-    res.send('add contacts')
+    res.send(req.body)
 })
 
 router.get('/', (req, res) => {
@@ -18,4 +18,4 @@ router.delete('/:id', (req, res) => {
     res.send('delete contacts')
 })
 
-module.exports = router
+export default router

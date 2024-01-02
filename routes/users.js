@@ -1,9 +1,13 @@
-const express = require('express')
+import express from 'express'
+import User from '../models/User.js'
+
 
 const router = express.Router()
 
+
+
 router.post('/', (req, res) => {
-    res.send('login or register user')
+    res.send(req.body)
 })
 
-module.exports = router
+export default router

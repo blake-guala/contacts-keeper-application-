@@ -1,4 +1,5 @@
-const express = require('express')
+// const express = require('express')
+import express  from "express"
 
 const router = express.Router()
 
@@ -10,4 +11,5 @@ router.post('/', (req, res) => {
     res.send('login user with jwt')
 })
 
-module.exports = router
+// module.exports = router
+export default router
