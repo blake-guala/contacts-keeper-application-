@@ -1,4 +1,7 @@
 const express = require('express')
+const connectMongoDB = require('./config/db')
+
+connectMongoDB()
 
 const app = express()
 
