@@ -1,7 +1,9 @@
 import express from 'express'
-import User from '../models/User.js'
 import { body, validationResult } from 'express-validator'
 import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+import config from 'config'
+import User from '../models/User.js'
 const router = express.Router()
 
 
@@ -34,13 +36,31 @@ router.post('/', [
                 password
             })
 
-            const salt = await bcrypt.genSalt(10)
+            const {genSalt, hash} = bcrypt
 
-            user.password = await bcrypt.hash(password, salt)
+            const salt = await genSalt(10)
 
-            res.send('user registered')
+            user.password = await hash(password, salt)
 
-            user.save()
+            const payload = {
+                user: {
+                    id: user.id
+                }
+            }
+
+            const { sign } = jwt
+            const secret = config.get('jwtSecret')
+
+            sign(payload, secret, {
+                expiresIn: 360000
+            }, (err, token) => {
+                if(err) throw err
+                return res.json({ token })
+            })
+
+            await user.save()
+
+
         }
     } catch (error) {
         console.error(error.message);

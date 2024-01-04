@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://arusiogologo:arusiogologo@contacts.cxdcspy.mongodb.net/"
+    "mongoURI": "mongodb+srv://arusiogologo:arusiogologo@contacts.cxdcspy.mongodb.net/",
+    "jwtSecret": "userJwt"
 }
