@@ -57,7 +57,7 @@ router.post('/', [
                 if(err) throw err
                 return res.json({ token })
             })
-
+            
             await user.save()
 
 
