@@ -36,7 +36,7 @@ router.post('/', [
                 password
             })
 
-            const {genSalt, hash} = bcrypt
+            const { genSalt, hash } = bcrypt
 
             const salt = await genSalt(10)
 
@@ -48,10 +48,9 @@ router.post('/', [
                 }
             }
 
-            const { sign } = jwt
             const secret = config.get('jwtSecret')
 
-            sign(payload, secret, {
+            jwt.sign(payload, secret, {
                 expiresIn: 360000
             }, (err, token) => {
                 if(err) throw err
