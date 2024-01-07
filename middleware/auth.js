@@ -25,5 +25,3 @@ const middleware = (req, res, next) => {
 
 export default middleware
 
-
-//The next is a function that can be called to move the execution past the piece of middleware and into the actual app.get server response.
