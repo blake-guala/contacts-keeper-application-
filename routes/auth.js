@@ -4,11 +4,20 @@ import jwt from "jsonwebtoken"
 import config from "config"
 import User from "../models/User.js"
 import bcrypt from 'bcryptjs'
+import auth from '../middleware/auth.js'
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
-    res.send('get registered user')
+router.get('/', auth ,async (req, res) => {
+    const { id } = req.user
+
+    try {
+        const user = await User.findById(id).select('-password')
+        return res.json(user) 
+    } catch (error) {
+        console.error(error.message)
+        return res.status(500).json({msg: 'Server error'})
+    }
 })
 
 router.post('/', [
@@ -26,7 +35,7 @@ router.post('/', [
     try {
         let user = await User.findOne({ email })
         if (!user) {
-            return res.status(400).json({ msg: 'invalid Email or Email not registered' })
+            return res.status(400).json({ msg: 'invalid email or email not registered' })
         } 
 
         const compPass = await bcrypt.compare(password, user.password)
@@ -52,8 +61,8 @@ router.post('/', [
 
 
     } catch (error) {
-        console.error(error.msg);
-        return 
+        console.error(error.message);
+        return res.status(500).json({ msg: 'Server error request' })
     }
 })
 

@@ -63,7 +63,7 @@ router.post('/', [
         }
     } catch (error) {
         console.error(error.message);
-        return res.status(400).json({ error: 'bad request'})
+        return res.status(500).json({ error: 'Server error'})
     }
 
 
