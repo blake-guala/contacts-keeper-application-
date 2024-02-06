@@ -1,24 +1,29 @@
 import React, { useState } from 'react'
 
 export const Login = () => {
-    const [user, setUser] = useState({
+    const [login, setLogin] = useState({
         email: '',
         password: ''
     })
 
-    const { email, password } = user
+    const { email, password } = login
 
-    const onChange = (e) => setUser({...user, [e.target.name] : e.target.value})
+    const onChange = (e) => setLogin({...login, [e.target.name] : e.target.value})
+
+    const onSubmit = (e) => {
+      e.preventDefault()
+      console.log(email, password);
+    }
 
 
   return (
-<form className='container'>
+<form className='container' onSubmit={onSubmit}>
   <h1 className='text-custom'>Login <i className="fa-solid fa-user"></i></h1>
   <hr />
   <div className="mb-3">
     <label htmlFor="email" className="form-label">Email address</label>
     <input type="email" value={email} name='email' className="form-control input-custom" onChange={onChange} required/>
-    <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+    <div  className="form-text">We'll never share your email with anyone else.</div>
   </div>
   <div className="mb-3">
     <label htmlFor="password" className="form-label">Password</label>
