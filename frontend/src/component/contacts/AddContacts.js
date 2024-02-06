@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addContact } from '../../store/contacts/contactSlice'
 
 export const AddContacts = () => {
-    const [register, setRegister] = useState({
+  const dispatch = useDispatch()
+
+    const [contact, setContact] = useState({
         firstName: '',
         lastName: '',
         phone: '',
@@ -9,13 +13,20 @@ export const AddContacts = () => {
         type: 'Personal'
     })
 
-    const { firstName,lastName, email, phone, type } = register
+    const { firstName,lastName, email, phone, type } = contact
 
-    const onChange = (e) => setRegister({...register, [e.target.name] : e.target.value})
+    const onChange = (e) => setContact({...contact, [e.target.name] : e.target.value})
 
     const onSubmit = e => {
       e.preventDefault()
-      console.log(firstName,lastName,email,phone,type)
+      dispatch(addContact(contact))
+      setContact({
+        firstName: '',
+        lastName: '',
+        phone: '',
+        email: '',
+        type: 'Personal'
+      })
     }
 
   return (

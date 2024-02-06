@@ -24,3 +24,20 @@
 .input-custom {
   width: 100%;
 }
+
+.h-custom {
+  text-align: left;
+}
+
+.type{
+  float: right;
+}
+
+.li-custom {
+  list-style-type: none;
+}
+
+.container-custom {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

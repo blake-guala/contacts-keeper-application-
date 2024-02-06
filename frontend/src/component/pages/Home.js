@@ -1,5 +1,6 @@
 import React from 'react'
 import { AddContacts } from '../contacts/AddContacts'
+import { Contact } from '../contacts/Contact'
 
 export const Home = () => {
   return (
@@ -9,7 +10,7 @@ export const Home = () => {
       <AddContacts/>
     </div>
     <div className="col-sm">
-      One of three columns
+      <Contact/>
     </div>
   </div>
 </div>

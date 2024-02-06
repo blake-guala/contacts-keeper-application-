@@ -7,8 +7,7 @@ export const Navbar = () => {
     <p className='icon-custom'>Contacts Book <i className="fa fa-address-book"></i></p>
       <div className="nav">
         <NavLink className="nav-item nav-link nav-custom" to="/">Home</NavLink>
-        <a className="nav-item nav-link nav-custom" href="!#">About Us</a>
-        <a className="nav-item nav-link nav-custom" href="!#">we go</a>
+        <NavLink className="nav-item nav-link nav-custom" to="/about">About Us</NavLink>
       </div>
   </nav>
   )
