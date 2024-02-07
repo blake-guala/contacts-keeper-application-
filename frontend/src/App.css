@@ -78,3 +78,13 @@
   background-color: #088F8F;
   color: white;
 }
+
+.custom-alert{
+  background-color:  #cf3432;
+  color: white;
+  text-align: center;
+  border-radius: 0.6rem;
+  display: block;
+  padding: 0.3rem;
+}
+

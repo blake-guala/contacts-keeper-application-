@@ -5,6 +5,7 @@ import { Home } from './component/pages/Home';
 import { Login } from './component/pages/Login';
 import { Register } from './component/pages/Register';
 import { About } from './component/pages/About';
+import { Alert } from './component/layout/Alert';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Router>
         <Navbar/>
         <div className='container'>
+        <Alert/>
           <Routes>
             <Route path='/' element={<Home/>}/>
             <Route path='/login' element={<Login/>} />

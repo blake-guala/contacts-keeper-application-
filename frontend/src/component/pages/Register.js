@@ -29,7 +29,7 @@ export const Register = () => {
   </div>
   <div className="mb-3">
     <label htmlFor="lastName" className="form-label">last Name</label>
-    <input type="text" value={lastName} name='lastName' className="form-control input-custom" onChange={onChange} required />
+    <input type="text" value={lastName} name='lastName' className="form-control input-custom" onChange={onChange}  />
   </div>
   <div className="mb-3">
     <label htmlFor="email" className="form-label">Email address</label>

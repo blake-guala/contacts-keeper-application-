@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { setAlert } from '../../store/contacts/contactSlice'
 
 export const Login = () => {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
     const [login, setLogin] = useState({
         email: '',
         password: ''
@@ -15,8 +16,12 @@ export const Login = () => {
     const onSubmit = (e) => {
       e.preventDefault()
       if (email === '' || password === '') {
-        // dispatch(setAlert())
+        dispatch(setAlert({ msg: 'Please fill out the fields', type: 'custom-alert' }))
       }
+      setLogin({
+        email: '',
+        password: ''
+      })
       console.log(email, password);
     }
 
