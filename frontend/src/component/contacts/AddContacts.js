@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { v4 } from 'uuid'
-import { useDispatch } from 'react-redux'
-import { addContact, setAlert } from '../../store/contacts/contactSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { addContact, setAlert, updateContact } from '../../store/contacts/contactSlice'
 
 export const AddContacts = () => {
   const dispatch = useDispatch()
+  const { current } = useSelector((state) => state.contact)
 
     const [contact, setContact] = useState({
         firstName: '',
@@ -15,14 +16,37 @@ export const AddContacts = () => {
         id: v4()
     })
 
+    useEffect(() => {
+      if (current) {
+        setContact(current)
+      }
+    },[current])
+
     const { firstName,lastName, email, phone, type } = contact
 
     const onChange = (e) => setContact({...contact, [e.target.name] : e.target.value})
 
     const onSubmit = e => {
       e.preventDefault()
-      dispatch(addContact(contact))
-      dispatch(setAlert({ msg: 'Contact added', type: 'success' }))
+      
+      
+      if (current === null) {
+        dispatch(addContact(contact))
+        dispatch(setAlert({ msg: 'Contact added', type: 'success' }))
+      } else {
+
+        const currentContact = {
+          firstName,
+          lastName,
+          email,
+          phone,
+          type,
+          id: current.id
+        }
+
+        dispatch(updateContact(currentContact))
+        dispatch(setAlert({ msg: 'Contact Updated', type: 'success' }))
+      }
       setContact({
         firstName: '',
         lastName: '',
@@ -36,14 +60,14 @@ export const AddContacts = () => {
   return (
     <div>
     <form className='container' onSubmit={onSubmit}>
-  <h1 className='text-custom'>Add contacts <i className="fa fa-user-plus" aria-hidden="true"></i></h1>
+  <h1 className='text-custom'>{current ? 'Edit contact' : 'Add Contact'} <i className="fa fa-user-plus" aria-hidden="true"></i></h1>
   <hr />
   <div className="mb-3">
     <label htmlFor="firstName" className="form-label">First name </label>
     <input type="text" value={firstName} name='firstName' className="form-control input-custom" onChange={onChange} required/>
   </div>
   <div className="mb-3">
-    <label htmlFor="lastName" className="form-label">Last name </label>
+    <label htmlFor="lastName" className="form-label">Last name (optional)</label>
     <input type="text" value={lastName} name='lastName' className="form-control input-custom" onChange={onChange} />
   </div>
   <div className="mb-3">
@@ -72,7 +96,7 @@ export const AddContacts = () => {
     Other
   </label>
 </div>
-  <button type="submit " className="btn btn-primary button-custom ">Add Contact</button>
+  <button type="submit " className="btn btn-primary button-custom ">{current ? 'Update Contact' : 'Add Contact'}</button>
 </form>
     </div>
   )

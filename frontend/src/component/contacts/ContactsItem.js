@@ -1,5 +1,5 @@
 import React from 'react'
-import { deleteContact, setAlert } from '../../store/contacts/contactSlice'
+import { deleteContact, setAlert, setCurrent } from '../../store/contacts/contactSlice'
 import { useDispatch } from 'react-redux'
 
 export const ContactsItem = ({ contact }) => {
@@ -9,6 +9,10 @@ export const ContactsItem = ({ contact }) => {
     const onDelete = (e) => {
       dispatch(deleteContact(id))
       dispatch(setAlert({ msg: 'Contact deleted', type: 'success' }))
+    }
+
+    const onEdit = (e) => {
+      dispatch(setCurrent(contact))
     }
 
   return (
@@ -21,7 +25,7 @@ export const ContactsItem = ({ contact }) => {
             <li className='li-custom'> <i className="fa-solid fa-phone"></i> {phone}</li>
         </ul>
         <button className='delete-custom' onClick={onDelete}><i className="fa fa-trash" style={{color: '#F40009'}}></i></button>
-        <button className='edit-custom' ><i className="fas fa-edit" style={{color: 'blue'}}></i></button>
+        <button className='edit-custom' onClick={onEdit} ><i className="fas fa-edit" style={{color: 'blue'}}></i></button>
     </div>
   )
 }

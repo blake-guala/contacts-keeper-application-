@@ -32,7 +32,7 @@ export const Login = () => {
   <hr />
   <div className="mb-3">
     <label htmlFor="email" className="form-label">Email address</label>
-    <input type="email" value={email} name='email' className="form-control input-custom" onChange={onChange} />
+    <input type="email" value={email} name='email' className="form-control input-custom" onChange={onChange} required/>
     <div  className="form-text">We'll never share your email with anyone else.</div>
   </div>
   <div className="mb-3">
