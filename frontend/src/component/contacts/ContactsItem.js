@@ -4,14 +4,15 @@ export const ContactsItem = ({ contact }) => {
     const { firstName,lastName, email, phone, type } = contact
   return (
     <div className='container-custom'>
-        <h6 className='h-custom'>{firstName} {''}{lastName} 
-        <span className='type'>{type}</span></h6>
-        <ul>
-            <li className='li-custom'>{email} <i className="fa fa-envelope" ></i></li>
-            <li className='li-custom'>{phone} <i className="fa-solid fa-phone"></i></li>
+        <h6 className='h-custom'><span className='name'> {firstName} {''}{lastName} </span>
+        <span className={`type ${type === 'Personal' ? 'Personal' : 'Business'}`}>{type}</span></h6>
+        <hr />
+        <ul className='ul-custom'>
+            <li className='li-custom'><i className="fa fa-envelope" > </i>  {email}</li>
+            <li className='li-custom'> <i className="fa-solid fa-phone"></i> {phone}</li>
         </ul>
-        <button><i className="fa fa-trash"></i></button>
-        <button><i className="fas fa-edit"></i></button>
+        <button className='delete-custom'><i className="fa fa-trash" style={{color: 'red'}}></i></button>
+        <button className='edit-custom'><i className="fas fa-edit" style={{color: 'blue'}}></i></button>
     </div>
   )
 }

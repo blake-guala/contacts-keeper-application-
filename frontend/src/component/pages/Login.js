@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 export const Login = () => {
+  // const dispatch = useDispatch()
     const [login, setLogin] = useState({
         email: '',
         password: ''
@@ -12,6 +14,9 @@ export const Login = () => {
 
     const onSubmit = (e) => {
       e.preventDefault()
+      if (email === '' || password === '') {
+        // dispatch(setAlert())
+      }
       console.log(email, password);
     }
 

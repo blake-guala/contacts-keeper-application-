@@ -27,10 +27,24 @@
 
 .h-custom {
   text-align: left;
+  margin: 0.5rem;
+  width: auto;
+}
+
+.name {
+  color: gray;
+  border-radius: 0.5rem;
 }
 
 .type{
   float: right;
+  border-style: groove;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.ul-custom {
+  margin: 0.5rem;
 }
 
 .li-custom {
@@ -40,4 +54,27 @@
 .container-custom {
   margin-top: 1rem;
   margin-bottom: 1rem;
+  border-style: groove;
+  border-radius: 0.5rem;
+  height: 11rem;
+}
+
+.delete-custom {
+  border-radius: 0.5rem;
+  width: 2rem;
+  margin: 0.5rem;
+}
+.edit-custom {
+  border-radius: 0.5rem;
+  width: 2rem;
+  margin: 0.5rem;
+}
+
+.Personal{
+  background-color: blue;
+  color: white;
+}
+.Business{
+  background-color: #088F8F;
+  color: white;
 }
