@@ -7,8 +7,9 @@ export const Contact = () => {
   return (
     <div>
         {contacts.length > 0 ? contacts.map(contact => (
-            <ContactsItem contact={contact}/>
-        )) : (<h4>Please add a contact</h4>)}
+            <ContactsItem key={contact.id} contact={contact}/>
+        )) : (<h4 className='null'><i className="fas fa-exclamation-circle" 
+        ></i> No contacts,please add a contact.</h4>)}
     </div>
   )
 }

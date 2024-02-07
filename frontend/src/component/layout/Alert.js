@@ -8,12 +8,14 @@ export const Alert = () => {
     const { alert } = useSelector((state) => state.contact)
 
     setTimeout(() => {
-        dispatch(removeAlert())
+        if (alert) {
+            dispatch(removeAlert())
+        }
     },3000)
 
   return (
     <div>
-        {alert && (<h3 > <span className='custom-alert'> <i className="fas fa-exclamation-circle" 
+        {alert && (<h3 > <span className={`custom-alert ${alert.type}`}> <i className="fas fa-exclamation-circle" 
         ></i>  {alert.msg}</span></h3>)}
     </div>
   )

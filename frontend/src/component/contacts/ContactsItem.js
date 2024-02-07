@@ -1,7 +1,16 @@
 import React from 'react'
+import { deleteContact, setAlert } from '../../store/contacts/contactSlice'
+import { useDispatch } from 'react-redux'
 
 export const ContactsItem = ({ contact }) => {
-    const { firstName,lastName, email, phone, type } = contact
+    const { firstName,lastName, email, phone, type, id } = contact
+    const dispatch = useDispatch()
+
+    const onDelete = (e) => {
+      dispatch(deleteContact(id))
+      dispatch(setAlert({ msg: 'Contact deleted', type: 'success' }))
+    }
+
   return (
     <div className='container-custom'>
         <h6 className='h-custom'><span className='name'> {firstName} {''}{lastName} </span>
@@ -11,8 +20,8 @@ export const ContactsItem = ({ contact }) => {
             <li className='li-custom'><i className="fa fa-envelope" > </i>  {email}</li>
             <li className='li-custom'> <i className="fa-solid fa-phone"></i> {phone}</li>
         </ul>
-        <button className='delete-custom'><i className="fa fa-trash" style={{color: 'red'}}></i></button>
-        <button className='edit-custom'><i className="fas fa-edit" style={{color: 'blue'}}></i></button>
+        <button className='delete-custom' onClick={onDelete}><i className="fa fa-trash" style={{color: '#F40009'}}></i></button>
+        <button className='edit-custom' ><i className="fas fa-edit" style={{color: 'blue'}}></i></button>
     </div>
   )
 }

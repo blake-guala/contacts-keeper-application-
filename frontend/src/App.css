@@ -80,11 +80,31 @@
 }
 
 .custom-alert{
+  margin: 0px;
   background-color:  #cf3432;
   color: white;
-  text-align: center;
-  border-radius: 0.6rem;
+  text-align: right;
+  position: absolute;
+  right: 0.3rem;
+  top: 4rem;
+  z-index: +1;
+  width: fit-content;
   display: block;
   padding: 0.3rem;
 }
 
+.success {
+  background-color: #088F8F;
+}
+
+.null {
+  text-align: center;
+  padding: 3rem;
+  font-size: 2rem;
+  color: gray;
+}
+
+.icon{
+  text-align: left;
+
+}

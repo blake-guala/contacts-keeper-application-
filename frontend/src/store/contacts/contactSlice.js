@@ -19,9 +19,14 @@ export const contactSlice = createSlice({
         },
         removeAlert:(state, {payload}) => {
             state.alert = null
+        },
+        deleteContact: (state, { payload }) => {
+            state.contacts = state.contacts.filter(contact => (
+                contact.id !== payload
+            ))
         }
     }
 })
 
-export const { addContact, setAlert, removeAlert } = contactSlice.actions
+export const { addContact, deleteContact, setAlert, removeAlert } = contactSlice.actions
 export default contactSlice.reducer

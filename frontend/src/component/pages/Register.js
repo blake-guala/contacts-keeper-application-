@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setAlert } from '../../store/contacts/contactSlice'
 
 export const Register = () => {
+  const dispatch = useDispatch()
     const [register, setRegister] = useState({
         firstName: '',
         lastName: '',
@@ -15,6 +18,11 @@ export const Register = () => {
 
     const onSubmit = (e) => {
         e.preventDefault()
+        if (firstName === '' || lastName === '' || email === '' || password === '' || password2 === '') {
+          dispatch(setAlert({ msg: 'Please fill out the fields', type: 'custom-alert'  }))
+        } else if (password !== password2) {
+          dispatch(setAlert({msg: 'Passwords does not match', type: 'custom-alert'}))
+        } 
         console.log(firstName, lastName, password, password2, email);
     }
 
@@ -29,7 +37,7 @@ export const Register = () => {
   </div>
   <div className="mb-3">
     <label htmlFor="lastName" className="form-label">last Name</label>
-    <input type="text" value={lastName} name='lastName' className="form-control input-custom" onChange={onChange}  />
+    <input type="text" value={lastName} name='lastName' className="form-control input-custom" onChange={onChange} required  />
   </div>
   <div className="mb-3">
     <label htmlFor="email" className="form-label">Email address</label>

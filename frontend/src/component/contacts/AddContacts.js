@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import { v4 } from 'uuid'
 import { useDispatch } from 'react-redux'
-import { addContact } from '../../store/contacts/contactSlice'
+import { addContact, setAlert } from '../../store/contacts/contactSlice'
 
 export const AddContacts = () => {
   const dispatch = useDispatch()
@@ -10,7 +11,8 @@ export const AddContacts = () => {
         lastName: '',
         phone: '',
         email: '',
-        type: 'Personal'
+        type: 'Personal',
+        id: v4()
     })
 
     const { firstName,lastName, email, phone, type } = contact
@@ -20,12 +22,14 @@ export const AddContacts = () => {
     const onSubmit = e => {
       e.preventDefault()
       dispatch(addContact(contact))
+      dispatch(setAlert({ msg: 'Contact added', type: 'success' }))
       setContact({
         firstName: '',
         lastName: '',
         phone: '',
         email: '',
-        type: 'Personal'
+        type: 'Personal',
+        id: v4()
       })
     }
 
@@ -60,6 +64,12 @@ export const AddContacts = () => {
   <input className="form-check-input" value='Business' type="radio" checked={type === 'Business'} name="type"  onChange={onChange}/>
   <label className="form-check-label" htmlFor="Business">
     Business
+  </label>
+</div>
+<div className="form-check">
+  <input className="form-check-input" value='Other' type="radio" checked={type === 'Other'} name="type"  onChange={onChange}/>
+  <label className="form-check-label" htmlFor="Other">
+    Other
   </label>
 </div>
   <button type="submit " className="btn btn-primary button-custom ">Add Contact</button>
