@@ -58,6 +58,7 @@ export const AddContacts = () => {
 
   return (
     <div>
+ 
     <form className='container' onSubmit={onSubmit}>
   <h1 className='text-custom'>{current ? 'Edit contact' : 'Add Contact'} <i className="fa fa-user-plus" aria-hidden="true"></i></h1>
   <hr />
