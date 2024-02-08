@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { addUserThunk } from "./usersAuthThunk"
+import { addUserThunk, getUserThunk } from "./usersAuthThunk"
 
 const token = localStorage.getItem('token') ? 
 localStorage.getItem('token') : null
@@ -34,6 +34,18 @@ export const userSlice = createSlice({
             state.loading = false
             state.error = payload
             state.authenticated = false
+        })
+        .addCase(getUserThunk.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(getUserThunk.fulfilled, (state, {payload}) => {
+            state.loading = false
+            state.authenticated = true
+            state.user = payload
+        })
+        .addCase(getUserThunk.rejected, (state, {payload}) => {
+            state.loading = false
+            state.error = payload
         })
     }
 })

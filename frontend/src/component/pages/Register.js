@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { setAlert } from '../../store/contacts/contactSlice'
-import { addUserThunk } from '../../store/usersAuth/usersAuthThunk'
+import { addUserThunk, getUserThunk } from '../../store/usersAuth/usersAuthThunk'
 import { setError } from '../../store/usersAuth/userSlice';
 
 export const Register = () => {
@@ -26,6 +26,7 @@ export const Register = () => {
     useEffect(() => {
       if (authenticated) {
         navigate('/')
+        dispatch(getUserThunk())
       } else if (error){
         dispatch(setAlert({ msg: error, type: 'nn' }))
         dispatch(setError())
