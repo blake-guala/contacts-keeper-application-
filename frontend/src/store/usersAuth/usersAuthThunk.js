@@ -28,3 +28,15 @@ export const addUserThunk = createAsyncThunk('post/user', async(user, { rejectWi
     }
 })
 
+export const loginUserThunk = createAsyncThunk('post/loginUser', async(login, {rejectWithValue}) => {
+    try {
+        const { data } = await axios.post('/api/auth', login, config)
+
+        localStorage.setItem('token', data.token)
+
+        return data
+    } catch (error) {
+        return rejectWithValue(error.response.data.msg)
+    }
+})
+

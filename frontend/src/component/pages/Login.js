@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { setAlert } from '../../store/contacts/contactSlice'
+import { getUserThunk, loginUserThunk } from '../../store/usersAuth/usersAuthThunk'
+import { useNavigate } from 'react-router-dom'
+import { setError } from '../../store/usersAuth/userSlice'
 
 export const Login = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { error, authenticated } = useSelector((state) => state.user)
     const [login, setLogin] = useState({
         email: '',
         password: ''
@@ -11,18 +16,26 @@ export const Login = () => {
 
     const { email, password } = login
 
+    useEffect(() => {
+      if (authenticated) {
+        navigate('/')
+        dispatch(getUserThunk())
+      } else if (error) {
+        dispatch(setAlert({ msg: error, type: 'hh' }))
+        dispatch(setError())
+      }
+      //eslint-disable-next-line
+    },[error,authenticated])
+
     const onChange = (e) => setLogin({...login, [e.target.name] : e.target.value})
 
     const onSubmit = (e) => {
       e.preventDefault()
       if (email === '' || password === '') {
         dispatch(setAlert({ msg: 'Please fill out the fields', type: 'custom-alert' }))
+      } else {
+        dispatch(loginUserThunk(login))
       }
-      setLogin({
-        email: '',
-        password: ''
-      })
-      console.log(email, password);
     }
 
 
