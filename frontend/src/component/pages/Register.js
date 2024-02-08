@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
 import { setAlert } from '../../store/contacts/contactSlice'
+import { addUserThunk } from '../../store/usersAuth/usersAuthThunk'
+import { setError } from '../../store/usersAuth/userSlice';
 
 export const Register = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const { authenticated, error } = useSelector((state) => state.user)
+
     const [register, setRegister] = useState({
         firstName: '',
         lastName: '',
@@ -16,14 +23,32 @@ export const Register = () => {
 
     const onChange = (e) => setRegister({...register, [e.target.name] : e.target.value})
 
+    useEffect(() => {
+      if (authenticated) {
+        navigate('/')
+      } else if (error){
+        dispatch(setAlert({ msg: error, type: 'nn' }))
+        dispatch(setError())
+      }
+      //eslint-disable-next-line
+    },[authenticated, error])
+
     const onSubmit = (e) => {
         e.preventDefault()
         if (firstName === '' || lastName === '' || email === '' || password === '' || password2 === '') {
           dispatch(setAlert({ msg: 'Please fill out the fields', type: 'custom-alert'  }))
         } else if (password !== password2) {
           dispatch(setAlert({msg: 'Passwords does not match', type: 'custom-alert'}))
-        } 
-        console.log(firstName, lastName, password, password2, email);
+        } else {
+          const user = {
+            firstName,
+            lastName,
+            email,
+            password
+          }
+
+          dispatch(addUserThunk(user))
+        }
     }
 
   return (
