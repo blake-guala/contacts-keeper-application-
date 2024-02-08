@@ -106,5 +106,11 @@
 
 .icon{
   text-align: left;
+}
 
+.search-custom {
+  width: 100%;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  margin-top: 1rem;
 }

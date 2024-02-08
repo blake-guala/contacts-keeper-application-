@@ -29,7 +29,6 @@ export const AddContacts = () => {
     const onSubmit = e => {
       e.preventDefault()
       
-      
       if (current === null) {
         dispatch(addContact(contact))
         dispatch(setAlert({ msg: 'Contact added', type: 'success' }))

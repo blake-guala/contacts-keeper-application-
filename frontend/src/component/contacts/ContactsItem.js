@@ -1,5 +1,5 @@
 import React from 'react'
-import { deleteContact, setAlert, setCurrent } from '../../store/contacts/contactSlice'
+import { deleteContact,  setAlert, setCurrent } from '../../store/contacts/contactSlice'
 import { useDispatch } from 'react-redux'
 
 export const ContactsItem = ({ contact }) => {

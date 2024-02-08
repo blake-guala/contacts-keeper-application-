@@ -3,7 +3,14 @@ import { ContactsItem } from './ContactsItem'
 import { useSelector } from 'react-redux'
 
 export const Contact = () => {
-    const { contacts } = useSelector((state) => state.contact) 
+    const { contacts, filtered } = useSelector((state) => state.contact) 
+    if (filtered !== null) {
+      return (
+        filtered.map(contact => (
+          <ContactsItem key={contact.id} contact={contact}/>
+        ))
+      )
+    } 
   return (
     <div>
         {contacts.length > 0 ? contacts.map(contact => (
