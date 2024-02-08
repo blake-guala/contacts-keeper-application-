@@ -15,8 +15,8 @@ export const Contact = () => {
     <div>
         {contacts.length > 0 ? contacts.map(contact => (
             <ContactsItem key={contact.id} contact={contact}/>
-        )) : (<h4 className='null'><i className="fas fa-exclamation-circle" 
-        ></i> No contacts,please add a contact.</h4>)}
+        )) : (<h4 className='null'><i style={{}} className="fas fa-exclamation-circle" 
+        ></i> Your contact list is empty, add contacts using the form.</h4>)}
     </div>
   )
 }
