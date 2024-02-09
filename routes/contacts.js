@@ -56,7 +56,7 @@ router.put('/:id', auth, async(req, res) => {
     const {firstName, lastName, phone, type, email} = req.body
 
     // since its an update you build a contact object based on the fields submitted
-    const contactField = {}
+    let contactField = {}
     if(firstName) contactField.firstName = firstName
     if(lastName) contactField.lastName = lastName
     if(phone) contactField.phone = phone
@@ -68,7 +68,7 @@ router.put('/:id', auth, async(req, res) => {
         if (!contact ) return res.status(404).json({ msg: 'Contact not found' })
 
         //make sure user owns contacts
-        if (contact.user !== req.user.id) return res.status(401).json({ msg: 'access denied unauthorized user' })
+        if (contact.user.toString() !== req.user.id) return res.status(401).json({ msg: 'access denied unauthorized user' })
 
         contact = await Contact.findByIdAndUpdate(req.params.id, { $set: contactField }, { new: true })
         
@@ -86,7 +86,7 @@ router.delete('/:id', auth, async(req, res) => {
 
         if (!contact) return res.status(404).json({ msg: 'Contact not found' })
 
-        if (contact.user !== req.user.id) return res.status(401).json({ msg: 'access denied' })
+        if (contact.user.toString() !== req.user.id) return res.status(401).json({ msg: 'access denied' })
 
         await Contact.findByIdAndDelete(req.params.id)
 

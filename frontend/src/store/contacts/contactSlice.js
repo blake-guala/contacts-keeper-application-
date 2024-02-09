@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { addContactThunk, getContactThunk } from "./contactThunk"
+import { addContactThunk, getContactThunk, updateContactThunk } from "./contactThunk"
 
 const initialState = {
     loading: false,
@@ -71,6 +71,18 @@ export const contactSlice = createSlice({
             state.contacts = payload
         })
         .addCase(getContactThunk.rejected, (state, {payload}) => {
+            state.loading = false
+            state.error = payload
+        })
+        .addCase(updateContactThunk.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(updateContactThunk.fulfilled, (state, {payload}) => {
+            state.contacts = state.contacts.map(contact => (
+                contact._id === payload._id ? payload : contact
+            ))
+        })
+        .addCase(updateContactThunk.rejected, (state, {payload}) => {
             state.loading = false
             state.error = payload
         })

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 //eslint-disable-next-line
 import { addContact, setAlert, updateContact } from '../../store/contacts/contactSlice'
-import { addContactThunk, getContactThunk } from '../../store/contacts/contactThunk'
+import { addContactThunk, getContactThunk, updateContactThunk } from '../../store/contacts/contactThunk'
 
 export const AddContacts = () => {
   const dispatch = useDispatch()
@@ -23,7 +23,7 @@ export const AddContacts = () => {
       }
     },[current])
 
-    const { firstName,lastName, email, phone, type } = contact
+    const { firstName,lastName, email, phone, type, _id} = contact
 
     const onChange = (e) => setContact({...contact, [e.target.name] : e.target.value})
 
@@ -43,10 +43,11 @@ export const AddContacts = () => {
           email,
           phone,
           type,
-          id: current.id
+          _id
         }
 
-        dispatch(updateContact(currentContact))
+        // dispatch(updateContact(currentContact))
+        dispatch(updateContactThunk(currentContact))
         dispatch(setAlert({ msg: 'Contact Updated', type: 'success' }))
       }
       setContact({
