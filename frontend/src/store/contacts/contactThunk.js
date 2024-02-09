@@ -11,3 +11,14 @@ export const addContactThunk = createAsyncThunk('post/contact', async(contact, {
         return rejectWithValue(error.response.data.msg)
     }
 })
+
+export const getContactThunk = createAsyncThunk('get/contacts', async(_,{ rejectWithValue }) => {
+    try {
+        const { data } = await axios.get('/api/contacts')
+
+        return data
+    } catch (error) {
+        return rejectWithValue(error.response.data.msg)
+    }
+})
+

@@ -3,11 +3,11 @@ import { deleteContact,  setAlert, setCurrent } from '../../store/contacts/conta
 import { useDispatch } from 'react-redux'
 
 export const ContactsItem = ({ contact }) => {
-    const { firstName,lastName, email, phone, type, id } = contact
+    const { firstName,lastName, email, phone, type, _id } = contact
     const dispatch = useDispatch()
 
     const onDelete = (e) => {
-      dispatch(deleteContact(id))
+      dispatch(deleteContact(_id))
       dispatch(setAlert({ msg: 'Contact deleted', type: 'success' }))
     }
 

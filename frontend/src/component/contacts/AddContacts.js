@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { v4 } from 'uuid'
+// import { v4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
 //eslint-disable-next-line
 import { addContact, setAlert, updateContact } from '../../store/contacts/contactSlice'
-import { addContactThunk } from '../../store/contacts/contactThunk'
+import { addContactThunk, getContactThunk } from '../../store/contacts/contactThunk'
 
 export const AddContacts = () => {
   const dispatch = useDispatch()
@@ -15,7 +15,6 @@ export const AddContacts = () => {
         phone: '',
         email: '',
         type: 'Personal',
-        id: v4()
     })
 
     useEffect(() => {
@@ -34,6 +33,7 @@ export const AddContacts = () => {
       if (current === null) {
         // dispatch(addContact(contact))
         dispatch(addContactThunk(contact))
+        dispatch(getContactThunk())
         dispatch(setAlert({ msg: 'Contact added', type: 'success' }))
       } else {
 
@@ -55,7 +55,6 @@ export const AddContacts = () => {
         phone: '',
         email: '',
         type: 'Personal',
-        id: v4()
       })
     }
 

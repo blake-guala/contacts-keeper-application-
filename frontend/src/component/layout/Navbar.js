@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { setAuth } from '../../store/usersAuth/userSlice'
+import { contactsNull } from '../../store/contacts/contactSlice'
 
 export const Navbar = () => {
   const { authenticated} = useSelector((state) => state.user)
@@ -9,6 +10,7 @@ export const Navbar = () => {
 
   const onLogout = () => {
     dispatch(setAuth())
+    dispatch(contactsNull())
   }
   return (
     <nav className="navbar  bg-light">
