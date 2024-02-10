@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ContactsItem } from './ContactsItem'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getContactThunk } from '../../store/contacts/contactThunk'
 
 export const Contact = () => {
     const { contacts, filtered } = useSelector((state) => state.contact) 
+    const { authenticated } = useSelector((state) => state.user)
+    const dispatch = useDispatch()
+    
+    useEffect(() => {
+      if (authenticated) {
+        dispatch(getContactThunk())
+      }
+      //eslint-disable-next-line
+    },[authenticated])
+
     if (filtered !== null) {
       return (
         filtered.map(contact => (

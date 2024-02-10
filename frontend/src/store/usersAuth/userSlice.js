@@ -16,6 +16,9 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers:{
+        setUserNull: (state) => {
+            state.user = null
+        },
         setError: (state) => {
             state.error = null
         },
@@ -67,5 +70,5 @@ export const userSlice = createSlice({
 })
 
 //eslint-disable-next-line
-export const { setError, setAuth } = userSlice.actions
+export const { setError, setAuth, setUserNull } = userSlice.actions
 export default userSlice.reducer

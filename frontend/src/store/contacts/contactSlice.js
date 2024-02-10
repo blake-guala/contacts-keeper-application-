@@ -81,6 +81,7 @@ export const contactSlice = createSlice({
             state.contacts = state.contacts.map(contact => (
                 contact._id === payload._id ? payload : contact
             ))
+            state.current = null
         })
         .addCase(updateContactThunk.rejected, (state, {payload}) => {
             state.loading = false

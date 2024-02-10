@@ -21,7 +21,6 @@ export const Login = () => {
       if (authenticated) {
         navigate('/')
         dispatch(getUserThunk())
-        dispatch(getContactThunk())
       } else if (error) {
         dispatch(setAlert({ msg: error, type: 'hh' }))
         dispatch(setError())

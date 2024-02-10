@@ -91,10 +91,12 @@
   width: fit-content;
   display: block;
   padding: 0.3rem;
+  opacity: 0.8;
 }
 
 .success {
   background-color: #088F8F;
+  opacity: 0.8;
 }
 
 .null {
