@@ -4,7 +4,6 @@ import { setAlert } from '../../store/contacts/contactSlice'
 import { getUserThunk, loginUserThunk } from '../../store/usersAuth/usersAuthThunk'
 import { useNavigate } from 'react-router-dom'
 import { setError } from '../../store/usersAuth/userSlice'
-import { getContactThunk } from '../../store/contacts/contactThunk'
 
 export const Login = () => {
   const dispatch = useDispatch()
