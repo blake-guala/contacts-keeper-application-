@@ -15,20 +15,6 @@ export const contactSlice = createSlice({
     name: 'contact',
     initialState,
     reducers:{
-        addContact: (state,{ payload }) => {
-            state.contacts = [payload, ...state.contacts]
-        },
-        deleteContact: (state, { payload }) => {
-            state.contacts = state.contacts.filter(contact => (
-                contact.id !== payload
-            ))
-        },
-        updateContact: (state, { payload }) => {
-            state.contacts = state.contacts.map(contact => (
-                contact.id === payload.id ? payload : contact
-            ))
-            state.current = null
-        },
         setAlert: (state, { payload }) => {
             state.alert = payload
         },
@@ -107,6 +93,5 @@ export const contactSlice = createSlice({
 
 })
 
-export const { addContact, deleteContact,updateContact, 
-    setAlert, removeAlert, setCurrent, searchContacts, setFilteredNull, contactsNull } = contactSlice.actions
+export const {setAlert, removeAlert, setCurrent, searchContacts, setFilteredNull, contactsNull } = contactSlice.actions
 export default contactSlice.reducer
