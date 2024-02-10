@@ -1,9 +1,10 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { searchContacts, setFilteredNull } from '../../store/contacts/contactSlice'
 
 export const Search = () => {
   const dispatch = useDispatch()
+  const { contacts } = useSelector((state) => state.contact)
 
   const onChange = (e) => {
     dispatch(searchContacts(e.target.value))
@@ -13,8 +14,8 @@ export const Search = () => {
   }
   return (
     <div>
-      <input onChange={onChange} className='search-custom'
-        type="text" placeholder='Search contacts...' />
+      { contacts.length > 0 && (<input onChange={onChange} className='search-custom'
+        type="text" placeholder='Search contacts...' />) }
     </div>
   )
 }
