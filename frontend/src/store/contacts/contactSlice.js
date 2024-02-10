@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { addContactThunk, getContactThunk, updateContactThunk } from "./contactThunk"
+import { addContactThunk, deleteContactThunk, getContactThunk, updateContactThunk } from "./contactThunk"
 
 const initialState = {
     loading: false,
@@ -7,7 +7,8 @@ const initialState = {
     alert: null,
     error: null,
     current: null,
-    filtered: null
+    filtered: null,
+    success: false
 }
 
 export const contactSlice = createSlice({
@@ -87,6 +88,21 @@ export const contactSlice = createSlice({
             state.loading = false
             state.error = payload
         })
+        .addCase(deleteContactThunk.pending, (state,{payload}) => {
+            state.loading = true
+            state.success = false
+        })
+        .addCase(deleteContactThunk.fulfilled, (state, {payload}) => {
+            state.loading = false
+            state.contacts = state.contacts.filter(contact => contact._id !== payload)
+            state.success = true
+        })
+        .addCase(deleteContactThunk.rejected, (state, {payload}) => {
+            state.loading = false
+            state.error = payload
+            state.success = false
+        })
+
     }
 
 })
