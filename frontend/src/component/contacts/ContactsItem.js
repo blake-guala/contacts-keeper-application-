@@ -13,6 +13,7 @@ export const ContactsItem = ({ contact }) => {
       dispatch(getContactThunk())
       
     }
+    
 
     const onEdit = (e) => {
       dispatch(setCurrent(contact))

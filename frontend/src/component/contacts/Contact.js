@@ -2,11 +2,16 @@ import React, { useEffect } from 'react'
 import { ContactsItem } from './ContactsItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { getContactThunk } from '../../store/contacts/contactThunk'
+import Loader from '../contactgif.gif'
 
 export const Contact = () => {
-    const { contacts, filtered } = useSelector((state) => state.contact) 
+    const { contacts, filtered,loading } = useSelector((state) => state.contact) 
     const { authenticated } = useSelector((state) => state.user)
+
     const dispatch = useDispatch()
+
+
+    
     
     useEffect(() => {
       if (authenticated) {
@@ -14,6 +19,13 @@ export const Contact = () => {
       }
       //eslint-disable-next-line
     },[authenticated])
+
+    if (loading) {
+      return (
+        <img src={Loader} style={{height: '30%',width: '40%',
+        marginLeft: 'auto', marginRight: 'auto', display: 'block'}} alt="loading..." />
+      )
+    }
 
     if (filtered !== null) {
       return (
